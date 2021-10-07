@@ -15,9 +15,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
-      - name: Download and unzip
-        run: 
-        wget https://github.com/michaelp3/linux/archive/$GITHUB_SHA.zip
-        unzip $GITHUB_SHA.zip
+      - name: Download
+        run: wget https://github.com/michaelp3/linux/archive/$GITHUB_SHA.zip
+        
+      - name: unzip
+        run: unzip $GITHUB_SHA.zip
 
     

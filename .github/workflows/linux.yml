@@ -17,6 +17,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Download and unzip
         run: 
-        wget https://github.com/michaelp3/linux/archive/$GITHUB_SHA.zip
-        unzip ./linux-$GITHUB_SHA.zip
+        wget https://github.com/michaelp3/linux/archive/$GITHUB_SHA.zip -o file.zip
+        unzip ./file.zip
     

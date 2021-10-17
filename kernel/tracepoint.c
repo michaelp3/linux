@@ -140,7 +140,7 @@ func_add(struct tracepoint_func **funcs, struct tracepoint_func *tp_func,
 	int nr_probes = 0;
 	int stub_funcs = 0;
 	int pos = -1;
->>>>>>> befe6d946551... tracepoint: Do not fail unregistering a probe due to memory failure
+
 
 	if (WARN_ON(!tp_func->func))
 		return ERR_PTR(-EINVAL);
@@ -158,7 +158,7 @@ func_add(struct tracepoint_func **funcs, struct tracepoint_func *tp_func,
 
 			if (old[nr_probes].func == tp_stub_func)
 				stub_funcs++;
->>>>>>> befe6d946551... tracepoint: Do not fail unregistering a probe due to memory failure
+
 		}
 	}
 	/* + 2 : one for new probe, one for NULL func - stub functions */
@@ -194,7 +194,7 @@ func_add(struct tracepoint_func **funcs, struct tracepoint_func *tp_func,
 			/* Copy the rest after it. */
 			memcpy(new + pos + 1, old + pos,
 			       (nr_probes - pos) * sizeof(struct tracepoint_func));
->>>>>>> befe6d946551... tracepoint: Do not fail unregistering a probe due to memory failure
+
 		}
 		if (pos < 0)
 			pos = nr_probes++;
@@ -253,7 +253,7 @@ static void *func_remove(struct tracepoint_func **funcs,
 				     || old[i].data != tp_func->data)
 				    && old[i].func != tp_stub_func)
 					new[j++] = old[i];
->>>>>>> befe6d946551... tracepoint: Do not fail unregistering a probe due to memory failure
+
 			new[nr_probes - nr_del].func = NULL;
 			*funcs = new;
 		} else {
@@ -273,7 +273,7 @@ static void *func_remove(struct tracepoint_func **funcs,
 					else
 						old[i].prio = -1;
 				}
->>>>>>> befe6d946551... tracepoint: Do not fail unregistering a probe due to memory failure
+
 			*funcs = old;
 		}
 	}

@@ -218,11 +218,11 @@ static void __print_stack_trace(struct btrfs_fs_info *fs_info,
 	stack_trace_print(ra->trace, ra->trace_len, 2);
 }
 #else
-static void inline __save_stack_trace(struct ref_action *ra)
+static inline void __save_stack_trace(struct ref_action *ra)
 {
 }
 
-static void inline __print_stack_trace(struct btrfs_fs_info *fs_info,
+static inline void __print_stack_trace(struct btrfs_fs_info *fs_info,
 				       struct ref_action *ra)
 {
 	btrfs_err(fs_info, "  ref-verify: no stacktrace support");
@@ -264,8 +264,8 @@ static struct block_entry *add_block_entry(struct btrfs_fs_info *fs_info,
 	struct block_entry *be = NULL, *exist;
 	struct root_entry *re = NULL;
 
-	re = kzalloc(sizeof(struct root_entry), GFP_KERNEL);
-	be = kzalloc(sizeof(struct block_entry), GFP_KERNEL);
+	re = kzalloc(sizeof(struct root_entry), GFP_NOFS);
+	be = kzalloc(sizeof(struct block_entry), GFP_NOFS);
 	if (!be || !re) {
 		kfree(re);
 		kfree(be);
@@ -313,7 +313,7 @@ static int add_tree_block(struct btrfs_fs_info *fs_info, u64 ref_root,
 	struct root_entry *re;
 	struct ref_entry *ref = NULL, *exist;
 
-	ref = kmalloc(sizeof(struct ref_entry), GFP_KERNEL);
+	ref = kmalloc(sizeof(struct ref_entry), GFP_NOFS);
 	if (!ref)
 		return -ENOMEM;
 
@@ -358,7 +358,7 @@ static int add_shared_data_ref(struct btrfs_fs_info *fs_info,
 	struct block_entry *be;
 	struct ref_entry *ref;
 
-	ref = kzalloc(sizeof(struct ref_entry), GFP_KERNEL);
+	ref = kzalloc(sizeof(struct ref_entry), GFP_NOFS);
 	if (!ref)
 		return -ENOMEM;
 	be = add_block_entry(fs_info, bytenr, num_bytes, 0);
@@ -393,7 +393,7 @@ static int add_extent_data_ref(struct btrfs_fs_info *fs_info,
 	u64 offset = btrfs_extent_data_ref_offset(leaf, dref);
 	u32 num_refs = btrfs_extent_data_ref_count(leaf, dref);
 
-	ref = kzalloc(sizeof(struct ref_entry), GFP_KERNEL);
+	ref = kzalloc(sizeof(struct ref_entry), GFP_NOFS);
 	if (!ref)
 		return -ENOMEM;
 	be = add_block_entry(fs_info, bytenr, num_bytes, ref_root);

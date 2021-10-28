@@ -465,6 +465,7 @@ static int tracepoint_remove_func(struct tracepoint *tp,
 		fallthrough;
 	case TP_FUNC_N:
 		rcu_assign_pointer(tp->funcs, tp_funcs);
+
 		/*
 		 * Make sure static func never uses incorrect data after a
 		 * N->...->2->1 (N>2) transition sequence.
@@ -475,6 +476,7 @@ static int tracepoint_remove_func(struct tracepoint *tp,
 	default:
 		WARN_ON_ONCE(1);
 		break;
+
 	}
 	release_probes(old);
 	return 0;

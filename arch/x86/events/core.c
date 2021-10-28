@@ -2475,6 +2475,7 @@ static int x86_pmu_event_init(struct perf_event *event)
 	return err;
 }
 
+
 void perf_clear_dirty_counters(void)
 {
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
@@ -2501,6 +2502,7 @@ void perf_clear_dirty_counters(void)
 
 	bitmap_zero(cpuc->dirty, X86_PMC_IDX_MAX);
 }
+
 
 static void x86_pmu_event_mapped(struct perf_event *event, struct mm_struct *mm)
 {

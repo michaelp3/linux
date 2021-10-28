@@ -5692,6 +5692,7 @@ void kvm_mmu_init_vm(struct kvm *kvm)
 {
 	struct kvm_page_track_notifier_node *node = &kvm->arch.mmu_sp_tracker;
 
+
 	spin_lock_init(&kvm->arch.mmu_unsync_pages_lock);
 
 	if (!kvm_mmu_init_tdp_mmu(kvm))
@@ -5701,6 +5702,7 @@ void kvm_mmu_init_vm(struct kvm *kvm)
 		 * accessing this struct kvm yet.
 		 */
 		kvm->arch.memslots_have_rmaps = true;
+
 
 	node->track_write = kvm_mmu_pte_write;
 	node->track_flush_slot = kvm_mmu_invalidate_zap_pages_in_memslot;
